@@ -12,3 +12,9 @@ prompts.question('Enter Bot type : ', (response) => {
 		console.log('Do you even know the way.');
 	}
 });
+
+prompts.question('Enter Bot Token', (response) => {
+	if (response === '') {
+		console.log('World');
+	}
+});
