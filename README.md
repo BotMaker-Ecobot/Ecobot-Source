@@ -1,3 +1,3 @@
 ## Welome to Ecobot
 
-[Ecobot Logo]("./Logo.png")
+(Logo.png")[Logo]
