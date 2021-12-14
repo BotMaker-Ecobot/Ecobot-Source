@@ -1,0 +1,24 @@
+{
+  "name": "discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "",
+    "dev-bot": "./src/index.js",
+    "dev-site": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vitejs/plugin-vue": "^2.0.1",
+    "discord.js": "^13.3.1",
+    "vite": "^2.7.2",
+    "vue": "^3.2.26"
+  },
+  "devDependencies": {
+    "eslint": "^8.4.1",
+    "nodemon": "^2.0.15"
+  }
+}
