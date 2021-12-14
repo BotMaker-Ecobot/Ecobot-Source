@@ -1,0 +1,23 @@
+{
+  "name": "botmaker",
+  "version": "1.0.0",
+  "description": "- This tool is for developers that want to build a bot but have no idea how",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "",
+    "test": "",
+    "build": "",
+    "publish": "",
+    "lint": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.4.1"
+  }
+}

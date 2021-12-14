@@ -1,0 +1,13 @@
+node_modules
+.DS_Store
+dist
+.vscode
+dist-str
+TODOs.md
+*.log
+temp
+explorations
+.idea
+*.local
+/packages/botmaker-core/LISENCE
+*.cpuprofile
