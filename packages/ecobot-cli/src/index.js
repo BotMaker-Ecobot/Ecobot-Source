@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import inquirer from 'inquirer';
-//import handleAnswers from './ssr/handleAnswers';
 
 const j = path.join(process.cwd(), 'package.json');
 const existingConfig = fs.existsSync(j);
@@ -19,7 +18,11 @@ async function firstQuestion () {
 				default: 'discord',
 			},
 		]);
-	//handleAnswers(answers);
+
+	switch (answers.type) {
+	case 'discord':
+		break;
+	}
 }
 
 if (existingConfig) {
@@ -27,7 +30,7 @@ if (existingConfig) {
 		{
 			type: 'confirm',
 			name: 'overwrite',
-			message: '⚠️Package.json exisits already would you like to overwrite it?⚠️',
+			message: '⚠️ Package.json exisits already would you like to overwrite it? ⚠️',
 			default: false,
 		}
 	]).then((answers) => {
