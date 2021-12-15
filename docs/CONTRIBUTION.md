@@ -10,7 +10,7 @@
 
 This project uses a monorepo setup that requries using [npm](https://docs.npmjs.com/about-npm) becuase it reliese on [Npm Workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces)
 
-`
+``` sh
     # install dependencies
     npm install
 
@@ -25,6 +25,6 @@ This project uses a monorepo setup that requries using [npm](https://docs.npmjs.
     ecobot create test-app
     cd test-app
     npm run dev
-`
+```
 
 - IMPORTANT: Anything marked with `-- Eventually` is not yet a properly implemneted feature.
