@@ -3,3 +3,6 @@
 
 - To contribute see the contribution guide.
 - [Contribution Guide](docs/CONTRIBUTION.md)
+
+- To see the minimum viable product
+- [MVP](docs/MVP.md)
