@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents, Permissions, MessageEmbed } = require('discord.js');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -42,6 +42,17 @@ client.on('interactionCreate', async interaction => {
         console.log(e);
         await interaction.reply({ content: 'There was an error while executing this command!', ephe})
     }
+});
+
+// Welcome Command
+client.on('guildMemberAdd', async interaction => {
+    const welcomeEmbed = new MessageEmbed()
+          .setColor('#0099ff')
+          .setTitle(`Welcome ${interaction.member}`)
+          .setDescription(`Have a great time in the server`)
+          .setFooter(`Have a great time in the server`);
+
+    await interaction.reply({ embeds: [welcomeEmbed] });
 });
 
 client.login(process.env.token);
