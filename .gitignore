@@ -3,6 +3,7 @@ node_modules
 dist
 .vscode
 .version
+.env
 dist-str
 TODOs.md
 *.log
