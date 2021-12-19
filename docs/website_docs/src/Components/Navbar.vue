@@ -10,10 +10,10 @@
           <li class="nav-links">Languages</li>
           <li class="nav-links">Github</li>
             <li class="nav-links-search">
-              <input type="search" placeholder="Search" v-model="name" class="fa fa-keyboard" />
+              <input type="search" placeholder="Search" class="fa fa-keyboard" />
               <i class="fa fa-keyboard icon"></i>
               <button @click="event()" type="submit"><img src="../assets/search.png" /></button>
-            </li>  
+            </li>
         </ul>
     </div>
 </template>
@@ -25,29 +25,29 @@ import axios from 'axios';
 const searchLink = "http://localhost:1337/search/";
 
 export default {
-  data() {
-    return {
-      name: ''
-    }
-  },
-  methods: {
-    event() {
-      console.log('Hello');
-
-      const search = {
-        searchTerm: this.name
-      }
-
-      axios({
-        method: 'post',
-        url: searchLink,
-        data: JSON.stringify(search)
-      }).then((response) => {
-        console.log(response);
-      }).catch((err) => {
-        console.error(err);
-      });
-    }
-  }
-}
+//   data() {
+//     return {
+//       name: ''
+//     }
+//   },
+//   methods: {
+//     event() {
+//       console.log('Hello');
+//
+//       const search = {
+//         searchTerm: this.name
+//       }
+//
+//       axios({
+//         method: 'post',
+//         url: searchLink,
+//         data: JSON.stringify(search)
+//       }).then((response) => {
+//         console.log(response);
+//       }).catch((err) => {
+//         console.error(err);
+//       });
+//     }
+//   }
+// }
 </script>
