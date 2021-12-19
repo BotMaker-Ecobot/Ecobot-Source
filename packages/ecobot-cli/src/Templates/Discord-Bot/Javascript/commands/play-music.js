@@ -35,5 +35,6 @@ module.exports = {
     connection.subscribe(player);
 
     player.on(AudioPlayerStatus.Idle, () => connection.destroy());
+		// TODO: Make the Link actually link
   }
 }

@@ -41,7 +41,9 @@ module.exports = {
                     console.log('World');
                     interaction.guild.members.fetch(user.id).then(member => {
                       member.roles.add(role);
-                    })
+                    });
+
+                    // TODO: Make reaction roles possible
                 });
               });
           } else {

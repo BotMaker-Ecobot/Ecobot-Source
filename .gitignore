@@ -13,4 +13,5 @@ explorations
 .idea
 *.local
 /packages/botmaker-core/LISENCE
+/temp
 *.cpuprofile
