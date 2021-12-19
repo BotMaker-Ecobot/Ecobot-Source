@@ -6,9 +6,6 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "",
-    "test": "",
-    "build": "",
     "publish": "npm publish",
     "test-serve": "jest",
     "lint": "eslint {packages/*/{src.types}/**}",

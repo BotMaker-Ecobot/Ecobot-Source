@@ -1,45 +1,34 @@
 import fs from 'fs';
 import path from 'path';
 import inquirer from 'inquirer';
-
-const j = path.join(process.cwd(), 'package.json');
-const existingConfig = fs.existsSync(j);
+import generate from './lib/Generator.js';
 
 async function firstQuestion () {
-	const answers = await inquirer 
+	const answers = await inquirer
 		.prompt([
 			{
 				type: 'list',
-				name: 'bot-type',
+				name: 'botType',
 				message: 'What kind of bot would you like to create?',
 				choices: [
 					'discord',
 				],
 				default: 'discord',
 			},
-		]);
+			{
+				type: 'text',
+				name: 'path',
+				message: 'Where would you like to put it?',
+				default: 'temp'
+			}
+		]).then(answer => {
+			console.log(answer.path);
 
-	switch (answers.type) {
-	case 'discord':
-		break;
-	}
+			switch (answer.botType) {
+				case 'discord':
+						generate(answer.path);
+			}
+		});
 }
 
-if (existingConfig) {
-	inquirer.prompt([
-		{
-			type: 'confirm',
-			name: 'overwrite',
-			message: '⚠️ Package.json exisits already would you like to overwrite it? ⚠️',
-			default: false,
-		}
-	]).then((answers) => {
-		if (answers.overwrite) {
-			firstQuestion();
-		} else {
-			console.log('Goodbye');
-		} 
-	});
-} else {
-	firstQuestion();
-}
+firstQuestion();

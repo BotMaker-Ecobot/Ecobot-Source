@@ -11,6 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.0.0",
-    "inquirer": "^8.2.0"
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.2.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
   }
 }

@@ -3,6 +3,7 @@ node_modules
 dist
 .vscode
 .version
+.env
 dist-str
 TODOs.md
 *.log
@@ -12,4 +13,5 @@ explorations
 .idea
 *.local
 /packages/botmaker-core/LISENCE
+/temp
 *.cpuprofile

@@ -2,9 +2,7 @@
 ----
 1. First I would like you to contact me at `deondreenglish45@gmail.com` or show your intrest by writing a comment on one of the issues.
 
-2. The github workflow for this project follows something similar to here
-[GitHub WorkFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow). If you would like to see the actuall workflow go [Here](docs/WORKFLOW.md)
-
+2. The Github workflow is a feature rich idea. First check and issue, all github issues should have a number on them. Then go to you terminal and run `git checkout -b C'issue-num'_V1`. Then just push to that branch.
 ---
 ## Getting Started
 
