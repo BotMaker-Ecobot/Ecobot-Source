@@ -2,7 +2,7 @@
 <template>
     <div>
         <ul  class="nav">
-          <li><img src="../assets/logo.png" /></li>
+          <li><img src="../assets/Logo.png" /></li>
           <li class="nav-links">Guide</li>
           <li class="nav-links">Config</li>
           <li class="nav-links">Plugins</li>
