@@ -3,12 +3,13 @@ import fse from 'fs-extra';
 import path from 'path';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
+import clui from 'clui';
 
-import dotenv from 'dotenv';
-dotenv.config();
+const Spinner = clui.Spinner;
+const templateSource = `/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
 
 function generatePackagejson(path, name) {
-  // TODO: Finish this function
+  // TODO: Generate Package Json
   const data = fs.readFileSync('package.json');
   data.name = { "name": `${name}`};
 }
@@ -42,29 +43,23 @@ function generateDotEnv(path, data) {
 }
 
 function generateRootDir(path, botType) {
+  const spinner = new Spinner(`Coppying root files 👍 `);
   const tempFile = (process.cwd(), path);
   const existingConfig = fs.existsSync(tempFile);
   const fsPromise = fs.promises;
 
-  // TODO: Make the switch work
+  // using fsPromise because it return a promise
+  // using clui for the spinner prompt
+  fsPromise.mkdir(path).then(() => {
+      spinner.start();
+      fse.copy(templateSource, path);
 
-  console.log(botType);
+      setTimeout(() => {
+          spinner.stop();
+          console.log(chalk.green(`Successfully coppied files to ${path}`));
+      }, 6000);
 
-  switch (botType) {
-    case 'For Fun':
-      fsPromise.mkdir(path).then(() => {
-          // Copy the /core path into /temp
-          fse.copy(process.env.coreTemplateSource, path);
-      });
-      break;
-
-    case 'For Moderation':
-      fsPromise.mkdir(path).then(() => {
-          fse.copy(process.templateSource, path);
-      });
-      break;
-
-  }
+  });
 }
 
 export {generateDotEnv, generateRootDir};

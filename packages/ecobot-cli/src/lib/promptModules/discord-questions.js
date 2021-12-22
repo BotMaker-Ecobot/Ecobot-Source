@@ -1,7 +1,23 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
+import figlet from 'figlet';
 
 import {generateDotEnv, generateRootDir } from '../Generator.js';
+
+
+// TODO: Make thankyouAscii show up at the end;
+const thankyouAscii = () => {
+		console.log(
+			chalk.green(
+				figlet.textSync(`Thanks! Enjoy!`, {
+					horizontalLayout: 'full',
+					verticalLayout: 'default',
+					width: 80,
+					whitespaceBreak: true
+				})
+			)
+		);
+};
 
 async function discordQuestions() {
 	const answers = await inquirer
@@ -92,10 +108,12 @@ async function discordQuestions() {
 							adminRole=${adminId}
 							voiceChannelId=${voiceChannelId}
 						`;
-						  generateDotEnv(path, data);
-							generateRootDir(path, data);
-						break;
-				default:
+						  generateRootDir(path, botUsage);
+
+							// Run this 7 seconds after the one above
+							setTimeout(() => {
+									generateDotEnv(path, data);
+							}, 7000);
 						break;
 			}
 		});
