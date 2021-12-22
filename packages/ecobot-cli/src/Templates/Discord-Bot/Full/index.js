@@ -42,9 +42,12 @@ client.on('interactionCreate', async interaction => {
         console.log(e);
         await interaction.reply({ content: 'There was an error while executing this command!', ephe})
     }
+
+    // TODO: I want to make the bot log to an excel sheet.
 });
 
 // Welcome Command
+// TODO: Add this to the /events folder
 client.on('guildMemberAdd', async interaction => {
     const welcomeEmbed = new MessageEmbed()
           .setColor('#0099ff')
