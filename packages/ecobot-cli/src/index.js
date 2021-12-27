@@ -1,7 +1,23 @@
 import fs from 'fs';
 import path from 'path';
 import inquirer from 'inquirer';
-import generate from './lib/Generator.js';
+import figlet from 'figlet';
+import chalk from 'chalk';
+
+import discordQuestions from './lib/promptModules/discord-questions.js';
+
+const ecobotAscii = () => {
+	console.log(
+		chalk.green(
+			figlet.textSync(`Ecobot`, {
+					horizontalLayout: 'full',
+					verticalLayout: 'default',
+					width: 80,
+					whitespaceBreak: true
+			})
+		)
+	);
+}
 
 async function firstQuestion () {
 	const answers = await inquirer
@@ -15,20 +31,20 @@ async function firstQuestion () {
 				],
 				default: 'discord',
 			},
-			{
-				type: 'text',
-				name: 'path',
-				message: 'Where would you like to put it?',
-				default: 'temp'
-			}
 		]).then(answer => {
-			console.log(answer.path);
-
 			switch (answer.botType) {
 				case 'discord':
-						generate(answer.path);
+						discordQuestions();
+				case 'slack':
+						break;
+				case 'github':
+						break;
 			}
 		});
 }
 
-firstQuestion();
+ecobotAscii();
+
+setTimeout(() => {
+		firstQuestion();
+}, 1000);
