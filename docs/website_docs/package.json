@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "nuxt build",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "nuxt": "^2.15.8",
     "sass": "^1.45.0",
     "vue": "^3.2.25"
   },

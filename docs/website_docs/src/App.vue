@@ -10,7 +10,7 @@
     </nav>
     <div class="container">
       <div>
-        <img src="./assets/Logo.png"/>
+        
       </div>
       <div class="description">
         Bots Made Easy.
@@ -24,21 +24,21 @@
         <div class="grid-item">
           <span>🛠 Rich Features</span>
           <p>
-            Support for generating in multiple languages such as: <br /> 
+            Support for generating in multiple languages such as: <br />
             Typescript, Javascript, and Python
           </p>
         </div>
         <div class="grid-item">
           <span>🛠 Rich Features</span>
           <p>
-            Support for generating in multiple languages such as: <br /> 
+            Support for generating in multiple languages such as: <br />
             Typescript, Javascript, and Python
           </p>
         </div>
         <div class="grid-item">
           <span>🛠 Rich Features</span>
           <p>
-            Support for generating in multiple languages such as: <br /> 
+            Support for generating in multiple languages such as: <br />
             Typescript, Javascript, and Python
           </p>
         </div>
@@ -71,4 +71,3 @@
     </div>
   </div>
 </template>
-
