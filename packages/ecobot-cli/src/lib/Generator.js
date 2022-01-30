@@ -4,14 +4,44 @@ import path from 'path';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import clui from 'clui';
+import Data from './util';
 
 const Spinner = clui.Spinner;
 const templateSource = `/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
 
 function generatePackagejson(path, name) {
-  // TODO: Generate Package Json
-  const data = fs.readFileSync('package.json');
-  data.name = { "name": `${name}`};
+  // Template for the json code
+  // 
+  Data(name);
+
+  // formatted JSON
+  data = JSON.stringify(data, null, 3);
+
+  const tempFile = (process.cwd(), path);
+  const existingFile = fs.existsSync(tempFile);
+
+  const wrFile = () => {
+    fs.writeFile(`${path}/package.json`, data, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(chalk.green(`File Written Successfully`));
+        }
+    });
+  };
+
+  // ! Check if file already exists
+  if (existingFile) {
+    inquirer.prompt([
+      {
+        name: 'existingFile',
+        type: 'confirm',
+        message: '⚠️ package.json exists. Would you like to create a new one?',
+      },
+    ]).then(() => {
+      wrFile(); 
+    });
+  }
 }
 
 function generateDotEnv(path, data) {
@@ -58,8 +88,7 @@ function generateRootDir(path, botType) {
           spinner.stop();
           console.log(chalk.green(`Successfully coppied files to ${path}`));
       }, 6000);
-
   });
 }
 
-export {generateDotEnv, generateRootDir};
+export { generateDotEnv, generateRootDir, generatePackagejson };

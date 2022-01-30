@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import figlet from 'figlet';
 
-import {generateDotEnv, generateRootDir } from '../Generator.js';
+import {generateDotEnv, generateRootDir, generatePackagejson } from '../Generator.js';
 
 
 // TODO: Make thankyouAscii show up at the end;
@@ -108,11 +108,13 @@ async function discordQuestions() {
 							adminRole=${adminId}
 							voiceChannelId=${voiceChannelId}
 						`;
+						
 						  generateRootDir(path, botUsage);
 
 							// Run this 7 seconds after the one above
 							setTimeout(() => {
 									generateDotEnv(path, data);
+									generatePackagejson(path, 'name');
 							}, 7000);
 						break;
 			}

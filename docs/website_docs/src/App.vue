@@ -1,10 +1,14 @@
 <script setup lang="ts">
   import './lib/css/Pages/Homepage.scss';
   import Navbar from './Components/Navbar.vue';
+  import EcobotGeneratorPage from './pages/EcobotGeneratorPage.vue';
 </script>
 
 <template>
-  <div>
+    <div>
+        <EcobotGeneratorPage />
+    </div>
+  <!-- <div>
     <nav>
       <Navbar />
     </nav>
@@ -69,6 +73,6 @@
         <p>MIT Licensed | Copyright © 2021-Present</p>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
