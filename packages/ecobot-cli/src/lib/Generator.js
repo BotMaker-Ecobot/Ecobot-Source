@@ -6,7 +6,8 @@ import chalk from 'chalk';
 import clui from 'clui';
 
 const Spinner = clui.Spinner;
-const templateSource = `/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
+const templateSourceMac = `/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
+const templateSourceLinux = `/home/deondre/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
 
 function generatePackagejson(path, name) {
   // TODO: Generate Package Json
@@ -52,7 +53,7 @@ function generateRootDir(path, botType) {
   // using clui for the spinner prompt
   fsPromise.mkdir(path).then(() => {
       spinner.start();
-      fse.copy(templateSource, path);
+      fse.copy(templateSourceLinux, path);
 
       setTimeout(() => {
           spinner.stop();
