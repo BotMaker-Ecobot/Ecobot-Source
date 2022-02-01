@@ -7,6 +7,7 @@ import chalk from 'chalk';
 import discordQuestions from './lib/promptModules/discord-questions.js';
 
 const ecobotAscii = () => {
+	console.clear();
 	console.log(
 		chalk.green(
 			figlet.textSync(`Ecobot`, {

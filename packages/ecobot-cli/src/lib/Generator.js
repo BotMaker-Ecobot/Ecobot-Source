@@ -4,15 +4,44 @@ import path from 'path';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import clui from 'clui';
-import Data from './util';
-
+import dotenv from 'dotenv';
+dotenv.config();
 const Spinner = clui.Spinner;
 const templateSource = `/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
 
+function Data (name) {
+  let data = {
+    "name":  `${name}`,
+    "main":   `index.js`,
+    "scripts" : {
+      "dev": "nodemon index.js"
+    },
+    "license": "MIT",
+    "devDependencies": {
+      "dotenv": "^10.0.0",
+      "eslint": "^8.5.0",
+      "nodemon": "^2.0.15"
+    },
+    "dependencies": {
+      "@discordjs/builders": "^0.9.0",
+      "@discordjs/opus": "^0.7.0",
+      "@discordjs/rest": "^0.1.0-canary.0",
+      "@discordjs/voice": "^0.7.5",
+      "chalk": "^5.0.0",
+      "discord-api-types": "^0.25.2",
+      "discord.js": "^13.3.1",
+      "ffmpeg-static": "^4.4.0",
+      "fs": "^0.0.1-security",
+      "ytdl-core": "^4.9.2"
+    }
+} 
+
+return data;
+}
+
 function generatePackagejson(path, name) {
   // Template for the json code
-  // 
-  Data(name);
+  let data = Data(name);
 
   // formatted JSON
   data = JSON.stringify(data, null, 3);
@@ -50,6 +79,14 @@ function generateDotEnv(path, data) {
   const existingFile = fs.existsSync(tempFile);
 
   const wrFile = () => {
+    // Remove white space from new line
+    var file = data.toString().split('\n').map((line) => {
+      return line.trim();
+    }).filter(Boolean);
+
+    JSON.parse(file);
+    console.log(file);
+
     fs.writeFile(`${path}/.env`, data, (err) => {
       if (err) {
         console.error(err);
@@ -73,7 +110,7 @@ function generateDotEnv(path, data) {
 }
 
 function generateRootDir(path, botType) {
-  const spinner = new Spinner(`Coppying root files 👍 `);
+  const spinner = new Spinner(`Copying root files 👍 `);
   const tempFile = (process.cwd(), path);
   const existingConfig = fs.existsSync(tempFile);
   const fsPromise = fs.promises;

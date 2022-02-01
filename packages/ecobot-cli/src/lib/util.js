@@ -25,6 +25,8 @@ function Data (name) {
           "ytdl-core": "^4.9.2"
         }
     } 
+
+    return data;
 }
 
-module.exports = Data;
+export default Data;

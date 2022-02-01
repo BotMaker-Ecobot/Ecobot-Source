@@ -50,7 +50,7 @@ async function discordQuestions() {
 			{
 					type: 'text',
 					name: 'guildId',
-					message: 'What is you guildId?',
+					message: 'What is your guildId?',
 					deafult: 'guildId',
 			},
 			{
@@ -116,6 +116,8 @@ async function discordQuestions() {
 									generateDotEnv(path, data);
 									generatePackagejson(path, 'name');
 							}, 7000);
+
+							
 						break;
 			}
 		});

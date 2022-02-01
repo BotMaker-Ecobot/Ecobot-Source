@@ -34,6 +34,8 @@ All of these are written in these language choices:
     - Go
 
 ---
+## At any point to exit the CLI you can press CTRL-C
+---
 ## How do I use Ecobot?
 
 Currently the only implementation is through the CLI so a little more advaced. But, don't worry in a few weeks time the website will be done. To use Ecobot follow these simeple steps:
