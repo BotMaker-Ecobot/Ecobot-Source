@@ -1,22 +1,25 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+/* eslint-disable no-case-declarations */
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import figlet from 'figlet';
 
-import {generateDotEnv, generateRootDir, generatePackagejson } from '../Generator.js';
+import {generateDotEnv, generateRootDir, generatePackagejson, exportToExcel } from '../Generator.js';
 
 
 // TODO: Make thankyouAscii show up at the end;
 const thankyouAscii = () => {
-		console.log(
-			chalk.green(
-				figlet.textSync(`Thanks! Enjoy!`, {
-					horizontalLayout: 'full',
-					verticalLayout: 'default',
-					width: 80,
-					whitespaceBreak: true
-				})
-			)
-		);
+	console.log(
+		chalk.green(
+			figlet.textSync('Thanks! Enjoy!', {
+				horizontalLayout: 'full',
+				verticalLayout: 'default',
+				width: 80,
+				whitespaceBreak: true
+			})
+		)
+	);
 };
 
 async function discordQuestions() {
@@ -48,10 +51,10 @@ async function discordQuestions() {
 				default: 'clientId'
 			},
 			{
-					type: 'text',
-					name: 'guildId',
-					message: 'What is your guildId?',
-					deafult: 'guildId',
+				type: 'text',
+				name: 'guildId',
+				message: 'What is your guildId?',
+				deafult: 'guildId',
 			},
 			{
 				type: 'text',
@@ -85,40 +88,42 @@ async function discordQuestions() {
 			},
 		]).then((answer) => {
 			 switch (answer.botUsage) {
-				case 'For Fun':
-						break;
-				case 'For Moderation':
-						break;
-				case 'For Fun and Moderation':
-						break;
-				case 'Default':
+			case 'For Fun':
+				break;
+			case 'For Moderation':
+				break;
+			case 'For Fun and Moderation':
+				break;
+			case 'Default':
 
-						const path = answer.export;
-						const token = answer.token;
-						const clientId = answer.clientId;
-						const guildId = answer.guildId;
-						const adminId = answer.adminRole;
-						const voiceChannelId = answer.voiceChannelId;
-						const botUsage = answer.botUsage;
+				const path = answer.export;
+				const token = answer.token;
+				const clientId = answer.clientId;
+				const guildId = answer.guildId;
+				const adminId = answer.adminRole;
+				const voiceChannelId = answer.voiceChannelId;
+				const botUsage = answer.botUsage;
 
-						const data = `
-							token=${token}
-							clientId=${clientId}
-							guildId=${guildId}
-							adminRole=${adminId}
-							voiceChannelId=${voiceChannelId}
-						`;
+				const data = `
+					token=${token}
+					clientId=${clientId}
+					guildId=${guildId}
+					adminRole=${adminId}
+					voiceChannelId=${voiceChannelId}
+				`;
 						
-						  generateRootDir(path, botUsage);
+				generateRootDir(path, botUsage);
+				exportToExcel(path);
 
-							// Run this 7 seconds after the one above
-							setTimeout(() => {
-									generateDotEnv(path, data);
-									generatePackagejson(path, 'name');
-							}, 7000);
+				// Run this 7 seconds after the one above
+				setTimeout(() => {
+					generateDotEnv(path, data);
+					generatePackagejson(path, 'name');
+					ExportUsageToExcel(data, path);
+				}, 7000);
 
-							
-						break;
+					
+				break;
 			}
 		});
 }
