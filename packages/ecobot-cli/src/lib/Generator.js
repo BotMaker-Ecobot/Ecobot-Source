@@ -128,9 +128,4 @@ function generateRootDir(path, _botType) {
 	});
 }
 
-function exportToExcel(data) {
-	var xls = new XlsExport([...data], String);
-	xls.exportToXLS('export.xls');
-}
-
-export { generateDotEnv, generateRootDir, generatePackagejson, exportToExcel };
+export { generateDotEnv, generateRootDir, generatePackagejson };
