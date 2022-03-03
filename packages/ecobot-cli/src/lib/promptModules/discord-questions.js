@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import figlet from 'figlet';
 
-import {generateDotEnv, generateRootDir, generatePackagejson, exportToExcel } from '../Generator.js';
+import {generateDotEnv, generateRootDir, generatePackagejson } from '../Generator.js';
 
 
 // TODO: Make thankyouAscii show up at the end;
@@ -113,13 +113,11 @@ async function discordQuestions() {
 				`;
 						
 				generateRootDir(path, botUsage);
-				exportToExcel(path);
 
 				// Run this 7 seconds after the one above
 				setTimeout(() => {
 					generateDotEnv(path, data);
 					generatePackagejson(path, 'name');
-					ExportUsageToExcel(data, path);
 				}, 7000);
 
 					
