@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const Spinner = clui.Spinner;
+<<<<<<< HEAD
 const templateSource = '/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full';
 
 function Data (name) {
@@ -39,6 +40,10 @@ function Data (name) {
 
 	return data;
 }
+=======
+const templateSourceMac = `/Users/deondreenglish/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
+const templateSourceLinux = `/home/deondre/Projects/Ecobot-Source/packages/ecobot-cli/src/Templates/Discord-Bot/Full`;
+>>>>>>> master
 
 function generatePackagejson(path, name) {
 	// Template for the json code
@@ -115,11 +120,19 @@ function generateRootDir(path, _botType) {
 	const spinner = new Spinner('Copying root files 👍 ');
 	const fsPromise = fs.promises;
 
+<<<<<<< HEAD
 	// using fsPromise because it return a promise
 	// using clui for the spinner prompt
 	fsPromise.mkdir(path).then(() => {
 		spinner.start();
 		fse.copy(templateSource, path);
+=======
+  // using fsPromise because it return a promise
+  // using clui for the spinner prompt
+  fsPromise.mkdir(path).then(() => {
+      spinner.start();
+      fse.copy(templateSourceLinux, path);
+>>>>>>> master
 
 		setTimeout(() => {
 			spinner.stop();
