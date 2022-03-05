@@ -2,7 +2,4 @@
 > Eco bot is a source for creating any type of bots with one easy command.
 
 - To contribute see the contribution guide.
-- [Contribution Guide](docs/CONTRIBUTION.md)
-
-- To see the minimum viable product
-- [MVP](docs/MVP.md)
+- [Contribution Guide](./CONTRIBUTION.md)
