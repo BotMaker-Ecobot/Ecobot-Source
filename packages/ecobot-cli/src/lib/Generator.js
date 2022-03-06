@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 import fs from 'fs';
 import fse from 'fs-extra';
