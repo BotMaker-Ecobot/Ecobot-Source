@@ -1,0 +1,19 @@
+{
+  "name": "discord-javascript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "eslint": "^8.10.0",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.27.3",
+    "discord.js": "^13.6.0"
+  }
+}
