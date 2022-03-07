@@ -21,6 +21,19 @@ const ecobotAscii = () => {
 	);
 };
 
+function processArgs(args) {
+	switch (args) {
+	case 'init': 
+		// Start the process of creating basic template
+		console.log(chalk.yellowBright.bold(args));
+		firstQuestion();
+		break;
+	case 'add': 
+		// Start the process of adding a module to the template
+		break;
+	}
+}
+
 async function firstQuestion () {
 	// eslint-disable-next-line no-unused-vars
 	const answers = await inquirer
@@ -46,9 +59,8 @@ async function firstQuestion () {
 			}
 		});
 }
-
 ecobotAscii();
 
 setTimeout(() => {
-	firstQuestion();
-}, 1000);
+	processArgs(process.argv[2]);
+}, 200);
