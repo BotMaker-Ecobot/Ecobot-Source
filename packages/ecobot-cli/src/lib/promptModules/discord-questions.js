@@ -101,7 +101,7 @@ async function discordQuestions() {
 					voiceChannelId=${values[6]}
 				`;
 						
-			let gen = new Generator(path, data, values[7]);
+			let gen = new Generator(path, data, values[7], values[0]);
 			gen.generateRootDir();
 
 			setTimeout(() => {
