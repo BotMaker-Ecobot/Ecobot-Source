@@ -6,44 +6,69 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import clui from 'clui';
 import dotenv from 'dotenv';
+import path from 'path';
+import { packageJSON, removeWhiteSpace, checkForExistingFile, copyTemplate } from './util.js';
 
 dotenv.config();
 const Spinner = clui.Spinner;
 const templateSource = 'packages/ecobot-cli/src/Templates/Discord-Bot/Full';
 
-function Data (name) {
-	let data = {
-		'name':  `${name}`,
-		'main':   'index.js',
-		'scripts' : {
-			'dev': 'nodemon index.js'
-		},
-		'license': 'MIT',
-		'devDependencies': {
-			'dotenv': '^10.0.0',
-			'eslint': '^8.5.0',
-			'nodemon': '^2.0.15'
-		},
-		'dependencies': {
-			'@discordjs/builders': '^0.9.0',
-			'@discordjs/opus': '^0.7.0',
-			'@discordjs/rest': '^0.1.0-canary.0',
-			'@discordjs/voice': '^0.7.5',
-			'chalk': '^5.0.0',
-			'discord-api-types': '^0.25.2',
-			'discord.js': '^13.3.1',
-			'ffmpeg-static': '^4.4.0',
-			'fs': '^0.0.1-security',
-			'ytdl-core': '^4.9.2'
-		}
-	}; 
 
-	return data;
+class Generator {
+	constructor(dirName, userAnswers, templateType, botName) {
+		this.dirName = dirName;
+		this.userAnswers = userAnswers;
+		this.templateType = templateType;
+		this.botName = botName;
+	}
+
+	generateRootDir() {
+		let cwd = process.cwd();
+		let tempDirPath = path.join(cwd, this.dirName);
+		let fsPromise = fs.promises;
+
+		fsPromise.mkdir(tempDirPath).then(() => {
+			console.log(chalk.green.bold('File Written Successfully!'));
+			copyTemplate(tempDirPath, this.templateType);
+		});
+	}
+
+	generateDotEnv() {
+		let cwd = process.cwd();
+		let tempDirPath = path.join(cwd, this.dirName);
+
+		if (checkForExistingFile(`${tempDirPath}/.env`)) return;
+
+		let data = removeWhiteSpace(this.userAnswers);
+
+		data = data.toString();
+
+		fs.writeFileSync(`${tempDirPath}/.env`, data, (err) => {
+			if (err) return;
+
+			console.log(chalk.green.bold('File written Successfully'));
+		});
+	}
+
+	generatePackageJSON() {
+		let content = packageJSON(this.botName);
+		let cwd = process.cwd();
+		let tempDirPath = path.join(cwd, this.dirName);
+
+		if (checkForExistingFile(`${tempDirPath}/package.json`, 'package.json')) return;
+
+		fs.writeFileSync(`${tempDirPath}/package.json`, content, (err) => {
+			if (err) return;
+
+			console.log(chalk.green.bold('File written Successfully'));
+		});
+	}
 }
+
 
 function generatePackagejson(path, name) {
 	// Template for the json code
-	let data = Data(name);
+	let data = packageJSON(name);
 
 	// formatted JSON
 	data = JSON.stringify(data, null, 3);
@@ -53,11 +78,9 @@ function generatePackagejson(path, name) {
 
 	const wrFile = () => {
 		fs.writeFile(`${path}/package.json`, data, (err) => {
-			if (err) {
-				console.error(err);
-			} else {
-				console.log(chalk.green('File Written Successfully'));
-			}
+			if (err) return;
+
+			console.log(chalk.green('File Written Successfully'));
 		});
 	};
 
@@ -69,7 +92,9 @@ function generatePackagejson(path, name) {
 				type: 'confirm',
 				message: '⚠️ package.json exists. Would you like to create a new one?',
 			},
-		]).then(() => {
+		]).then((answer) => {
+			if (answer == 'n') return; 
+
 			wrFile(); 
 		});
 	}
@@ -81,20 +106,11 @@ function generateDotEnv(path, data) {
 	const existingFile = fs.existsSync(tempFile);
 
 	const wrFile = () => {
-		// Remove white space from new line
-		var file = data.toString().split('\n').map((line) => {
-			return line.trim();
-		}).filter(Boolean);
-
-		JSON.stringify(file);
-		console.log(file);
 
 		fs.writeFile(`${path}/.env`, data, (err) => {
-			if (err) {
-				console.error(err);
-			} else {
-				console.log(chalk.green('File Written Successfully'));
-			}
+			if (err) return;
+			
+			console.log(chalk.green('File Written Successfully'));
 		});
 	};
 	// Check if the file exists then make the file.
@@ -105,14 +121,15 @@ function generateDotEnv(path, data) {
 				type: 'confirm',
 				message: '⚠️ .env exists. Would you like to override it. ⚠️',
 			}
-		]).then(() => {
+		]).then((answer) => {
+			if (answer == 'n') return;
+
 			wrFile();
 		});
 	}
 }
 
-// eslint-disable-next-line no-unused-vars
-function generateRootDir(path, _botType) {
+function generateRootDir(path) {
 	const spinner = new Spinner('Copying root files 👍 ');
 	const fsPromise = fs.promises;
 
@@ -121,18 +138,12 @@ function generateRootDir(path, _botType) {
 	fsPromise.mkdir(path).then(() => {
 		spinner.start();
 		fse.copy(templateSource, path);
-		// using fsPromise because it return a promise
-		// using clui for the spinner prompt
-		fsPromise.mkdir(path).then(() => {
-			spinner.start();
-			fse.copy(templateSourceLinux, path);
-
-			setTimeout(() => {
-				spinner.stop();
-				console.log(chalk.green(`Successfully coppied files to ${path}`));
-			}, 6000);
-		});
+		// Wait for the time the files take to copy
+		setTimeout(() => {
+			spinner.stop();
+			console.log(chalk.green(`Successfully copied files to ${path}`));
+		}, 6000);
 	});
 }
 
-export { generateDotEnv, generateRootDir, generatePackagejson };
+export { generateDotEnv, generateRootDir, generatePackagejson, Generator };

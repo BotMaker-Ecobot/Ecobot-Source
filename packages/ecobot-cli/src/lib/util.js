@@ -1,5 +1,11 @@
+/* eslint-disable no-undef */
+import fs from 'fs';
+import inquirer from 'inquirer';
+import fse from 'fs-extra';
+import chalk from 'chalk';
+import path from 'path';
 
-function Data (name) {
+function packageJSON (name) {
 	let data = {
 		'name':  `${name}`,
 		'main':   'index.js',
@@ -26,7 +32,65 @@ function Data (name) {
 		}
 	}; 
 
-	return data;
+	return JSON.stringify(data, null, 3);
+}
+/**
+ * 
+ * @param {name of the file to check for} existingFile 
+ * @param {name of the file} filename 
+ */
+function checkForExistingFile(existingFile, filename) {
+	let file = fs.existsSync(existingFile);
+
+	if (file) {
+		inquirer.prompt({
+			name: 'existing-file',
+			type: 'confirm',
+			message: `${filename} already exists. Would you like to create a new one? `
+		}).then((answer) => {
+			return answer['existing-file'];
+		});
+	}
+
+	return false;
 }
 
-export default Data;
+function processAnswers(answers) {
+	let values = [];
+
+	for (const key in answers) {
+		values.push(answers[key]);
+	}
+
+	return values;
+}
+
+function removeWhiteSpace(toRemove) {
+	var content = toRemove.toString().replace(/\t/g, '').split('\r\n');
+	return content;
+}
+
+function copyTemplate(sourcePath, templateType) {
+	console.time();
+	let cwd = process.cwd();
+
+	// eslint-disable-next-line quotes
+	let templatePath = path.join(`${cwd}/src/Templates`, `discord-${templateType}`);
+
+
+	fse.copy(templatePath, sourcePath, err => {
+		if (err) return console.error(err);
+
+		console.log(templatePath);
+
+		console.log(chalk.green.bold('Successfully copied files over to your directory! 😎'));
+	});
+}
+
+export {
+	packageJSON, 
+	checkForExistingFile,
+	processAnswers,
+	removeWhiteSpace,
+	copyTemplate,
+};

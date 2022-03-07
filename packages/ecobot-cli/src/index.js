@@ -10,7 +10,7 @@ import discordQuestions from './lib/promptModules/discord-questions.js';
 const ecobotAscii = () => {
 	console.clear();
 	console.log(
-		chalk.green(
+		chalk.green.bold(
 			figlet.textSync('Ecobot', {
 				horizontalLayout: 'full',
 				verticalLayout: 'default',

@@ -5,7 +5,8 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import figlet from 'figlet';
 
-import {generateDotEnv, generateRootDir, generatePackagejson } from '../Generator.js';
+import { generateDotEnv, Generator, generatePackagejson } from '../Generator.js';
+import { processAnswers } from '../util.js';
 
 
 // TODO: Make thankyouAscii show up at the end;
@@ -54,7 +55,7 @@ async function discordQuestions() {
 				type: 'text',
 				name: 'guildId',
 				message: 'What is your guildId?',
-				deafult: 'guildId',
+				default: 'guildId',
 			},
 			{
 				type: 'text',
@@ -71,14 +72,14 @@ async function discordQuestions() {
 			// Bot Usage
 			{
 				type: 'list',
-				name: 'botUsage',
+				name: 'languageChoice',
 				choices: [
-					'Default',
-					'For Fun',
-					'For Moderation',
-					'For Fun & Moderation',
+					'javascript',
+					'python', 
+					'rust',
+					'golang'
 				],
-				default: 'Deafault',
+				default: 'javascript',
 			},
 			{
 				type: 'text',
@@ -87,42 +88,26 @@ async function discordQuestions() {
 				default: 'temp',
 			},
 		]).then((answer) => {
-			 switch (answer.botUsage) {
-			case 'For Fun':
-				break;
-			case 'For Moderation':
-				break;
-			case 'For Fun and Moderation':
-				break;
-			case 'Default':
-
-				const path = answer.export;
-				const token = answer.token;
-				const clientId = answer.clientId;
-				const guildId = answer.guildId;
-				const adminId = answer.adminRole;
-				const voiceChannelId = answer.voiceChannelId;
-				const botUsage = answer.botUsage;
-
-				const data = `
-					token=${token}
-					clientId=${clientId}
-					guildId=${guildId}
-					adminRole=${adminId}
-					voiceChannelId=${voiceChannelId}
+			let values = processAnswers(answer);
+			console.log(values);
+					
+			let path = answer.export;
+					
+			const data = `
+					token=${values[2]}
+					clientId=${values[3]}
+					guildId=${values[4]}
+					adminRole=${values[5]}
+					voiceChannelId=${values[6]}
 				`;
 						
-				generateRootDir(path, botUsage);
+			let gen = new Generator(path, data, values[7]);
+			gen.generateRootDir();
 
-				// Run this 7 seconds after the one above
-				setTimeout(() => {
-					generateDotEnv(path, data);
-					generatePackagejson(path, 'name');
-				}, 7000);
-
-					
-				break;
-			}
+			setTimeout(() => {
+				gen.generatePackageJSON();
+				gen.generateDotEnv();
+			}, 1000);
 		});
 }
 

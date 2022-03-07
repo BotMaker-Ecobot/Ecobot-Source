@@ -44,7 +44,7 @@ def CreatePath(parent_dir, folder_name, template_name):
     """
 
     # check for null reference errors
-    if parent_dir or folder_name or template_name is None:
+    if not parent_dir or folder_name or template_name:
         print(chalk.yellow.bold("One of the given parameters is null"))
         pass
 

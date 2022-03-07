@@ -2,6 +2,11 @@
  1. be able to run `ecobot init`
  2. be able to run `ecobot add`
 
+# TODO LIST
+    * [ ] Move Generator.js methods into a class
+    * [ ] Figure out how to run ecobot init
+    * [ ] rewrite all templates
+
 ## Understanding commands
 
 1. ecobot init
