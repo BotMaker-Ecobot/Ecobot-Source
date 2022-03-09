@@ -2,34 +2,22 @@
 
 /* eslint-disable no-undef */
 import inquirer from 'inquirer';
-import figlet from 'figlet';
-import chalk from 'chalk';
 
 import discordQuestions from './lib/promptModules/discord-questions.js';
-
-const ecobotAscii = () => {
-	console.clear();
-	console.log(
-		chalk.green.bold(
-			figlet.textSync('Ecobot', {
-				horizontalLayout: 'full',
-				verticalLayout: 'default',
-				width: 80,
-				whitespaceBreak: true
-			})
-		)
-	);
-};
+import { Generator } from './lib/Generator.js';
+import { ecobotAscii } from './lib/ascii.js';
 
 function processArgs(args) {
 	switch (args) {
 	case 'init': 
 		// Start the process of creating basic template
-		console.log(chalk.yellowBright.bold(args));
 		firstQuestion();
 		break;
 	case 'add': 
 		// Start the process of adding a module to the template
+		// eslint-disable-next-line no-case-declarations
+		let gen = new Generator('temp', '', 'javascript', '', process.argv[3]);
+		gen.addPackage();
 		break;
 	}
 }
@@ -63,4 +51,4 @@ ecobotAscii();
 
 setTimeout(() => {
 	processArgs(process.argv[2]);
-}, 200);
+}, 100);

@@ -5,6 +5,8 @@ import fse from 'fs-extra';
 import chalk from 'chalk';
 import path from 'path';
 
+let cwd = process.cwd();
+
 function packageJSON (name) {
 	let data = {
 		'name':  `${name}`,
@@ -71,8 +73,6 @@ function removeWhiteSpace(toRemove) {
 }
 
 function copyTemplate(sourcePath, templateType) {
-	console.time();
-	let cwd = process.cwd();
 
 	// eslint-disable-next-line quotes
 	let templatePath = path.join(`${cwd}/src/Templates`, `discord-${templateType}`);
@@ -87,10 +87,23 @@ function copyTemplate(sourcePath, templateType) {
 	});
 }
 
+function copyPackage(sourcePath, language, packageName) {
+	let packagePath = path.join(`${cwd}/src/Addons`, `discord-${language}-${packageName}`);
+	
+	fse.copy(packagePath, sourcePath, err => {
+		if (err) return console.error(err);
+
+		console.log(packagePath);
+
+		console.log(chalk.green.bold('Successfully copied files over to your directory! 😎'));
+	});
+}
+
 export {
 	packageJSON, 
 	checkForExistingFile,
 	processAnswers,
 	removeWhiteSpace,
 	copyTemplate,
+	copyPackage
 };

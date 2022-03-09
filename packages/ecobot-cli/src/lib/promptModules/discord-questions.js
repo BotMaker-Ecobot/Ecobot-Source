@@ -2,26 +2,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-case-declarations */
 import inquirer from 'inquirer';
-import chalk from 'chalk';
-import figlet from 'figlet';
 
-import { generateDotEnv, Generator, generatePackagejson } from '../Generator.js';
+import { Generator } from '../Generator.js';
 import { processAnswers } from '../util.js';
+import { thankyouAscii } from '../ascii.js';
 
 
-// TODO: Make thankyouAscii show up at the end;
-const thankyouAscii = () => {
-	console.log(
-		chalk.green(
-			figlet.textSync('Thanks! Enjoy!', {
-				horizontalLayout: 'full',
-				verticalLayout: 'default',
-				width: 80,
-				whitespaceBreak: true
-			})
-		)
-	);
-};
+// TODO: Make thankyouAscii show up at the end
 
 async function discordQuestions() {
 	const answers = await inquirer
@@ -89,7 +76,7 @@ async function discordQuestions() {
 			},
 		]).then((answer) => {
 			let values = processAnswers(answer);
-			console.log(values);
+			// console.log(values);
 					
 			let path = answer.export;
 					
@@ -108,6 +95,10 @@ async function discordQuestions() {
 				gen.generatePackageJSON();
 				gen.generateDotEnv();
 			}, 1000);
+
+			setTimeout(() => {
+				thankyouAscii();
+			}, 2000);
 		});
 }
 
