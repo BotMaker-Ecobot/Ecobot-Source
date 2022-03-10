@@ -1,0 +1,15 @@
+[dependencies.serenity]
+git = "https://github.com/serenity-rs/serenity"
+branch = "current"
+features = [
+	"builder",
+	"cache",
+	"framework",
+	"model",
+	"standerd_framework",
+	"rustls_backend",
+	"utils",
+]
+
+[dependencies]
+ron = "0.5.1"
