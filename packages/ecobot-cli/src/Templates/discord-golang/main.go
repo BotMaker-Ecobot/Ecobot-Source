@@ -1,13 +1,13 @@
 package main
 
-import (
+import ( 
 	"fmt"
-	"golang-discord-bot/config"
-	"golang-discord-bot/bot"
+	"discord-golang/bot"
+	"discord-golang/config"
 )
 
 func main() {
-	err := cofig.ReadConfig()
+	err := config.ReadConfig()
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -15,7 +15,6 @@ func main() {
 	}
 
 	bot.Start()
-
 	<-make(chan struct{})
 	return
 }

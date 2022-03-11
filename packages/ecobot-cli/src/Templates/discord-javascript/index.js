@@ -1,5 +1,4 @@
 import { Client, Collection, Intents } from 'discord.js';
-import { getQuote } from './util.js';
 import fs from 'fs';
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });

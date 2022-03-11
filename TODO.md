@@ -1,4 +1,4 @@
-## MVP
+# MVP
  1. be able to run `ecobot init`
  2. be able to run `ecobot add`
 
@@ -44,4 +44,3 @@
                     - !ban
                     - !slowmode
                     - !user
-

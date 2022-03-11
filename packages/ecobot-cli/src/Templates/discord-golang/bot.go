@@ -2,8 +2,7 @@ package bot
 
 import (
 	"fmt"
-	"golang-discord-bot/config"
-
+	"discord-golang/config"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -12,7 +11,6 @@ var goBot *discordgo.Session
 
 func Start() {
 	goBot, err := discordgo.New("Bot " + config.Token)
-
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -28,16 +26,15 @@ func Start() {
 
 	BotId = u.ID
 
-	gotBot.AddHandler(messageHandler)
+	goBot.AddHandler(messageHandler)
 
 	err = goBot.Open()
-
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 
-	fmt.Println("Bot is Running!")
+	fmt.Println("Bot is running !")
 }
 
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -46,6 +43,6 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.Content == "ping" {
-		_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
+		_, _ = s.ChannelMessageSend(m.ChannelID, "Pong!")
 	}
 }

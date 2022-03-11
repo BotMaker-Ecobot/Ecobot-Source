@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	Token	string
+	Token string // To store value of Token from config.json
 	BotPrefix string
 
 	config *configStruct
@@ -19,13 +19,12 @@ type configStruct struct {
 }
 
 func ReadConfig() error {
-	fmt.Println("Reading config file...")
+	fmt.Println("Rading config file...")
 	file, err := ioutil.ReadFile("./config.json")
 
-	// If there is an erorr
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return
 	}
 
 	fmt.Println(string(file))

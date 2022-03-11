@@ -1,4 +1,4 @@
-module discord-go
+module discord-golang
 
 go 1.17
 
