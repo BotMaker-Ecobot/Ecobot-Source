@@ -1,7 +1,19 @@
-import { Client, Collection, Intents } from 'discord.js';
-import fs from 'fs';
+const { Client, Collection, Intents } = require('discord.js');
+const fs = require('fs');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+// Handle events
+for (const file of eventFiles) {
+	const event =  require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
 
 client.comamnds = new Collection();
 const commandFiles = fs

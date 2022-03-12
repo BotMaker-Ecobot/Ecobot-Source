@@ -1,7 +1,6 @@
-import { SlashCommandBuilder } from '@discordjs/builders';
-import { REST } from '@discordjs/rest';
-import fs from 'fs';
-import { Routes } from 'discord-api-types';
+const { REST } = require('@discordjs/rest');
+const fs = require('fs');
+const { Routes } = require('discord-api-types');
 
 const commands = [];
 const commandFiles = fs
