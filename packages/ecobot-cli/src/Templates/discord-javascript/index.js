@@ -5,6 +5,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
+// TODO: add the ability to create a template based on component architechture
+
 // Handle events
 for (const file of eventFiles) {
 	const event =  require(`./events/${file}`);

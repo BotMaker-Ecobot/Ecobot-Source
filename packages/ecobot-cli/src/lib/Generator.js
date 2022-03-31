@@ -11,8 +11,18 @@ dotenv.config();
 const Spinner = clui.Spinner;
 
 
+/**
+ * @description - This function is used to generate the all of the types of bots and their respective files.
+ * @param {string} botType - The type of bot to be generated.
+ * @param {string} botName - The name of the bot to be generated.
+ * @param {string} dirName - The name of the directory to be created.
+ * @param {string} userAnswers - The answers from the user.
+ * @param {string} packageName - The name of the package.
+ * @param {string} templateType - The programming language of the template.
+ */
 class Generator {
-	constructor(dirName, userAnswers, templateType, botName, packageName) {
+	constructor(dirName, userAnswers, templateType, botName, packageName, botType) {
+		this.botType = botType;
 		this.dirName = dirName;
 		this.userAnswers = userAnswers;
 		this.templateType = templateType;

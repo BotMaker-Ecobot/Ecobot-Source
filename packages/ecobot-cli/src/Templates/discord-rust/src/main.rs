@@ -15,6 +15,10 @@ impl EventHandler for Handler {
     }
 }
 
+fn returnString() {
+    return "Hello World"; 
+}
+
 fn main() {
     let _ = Config::new().save();
     let config = Config::load().unwrap();

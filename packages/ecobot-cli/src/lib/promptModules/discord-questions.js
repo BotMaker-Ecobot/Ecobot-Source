@@ -11,6 +11,7 @@ import { thankyouAscii } from '../ascii.js';
 // TODO: Make thankyouAscii show up at the end
 
 async function discordQuestions() {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const answers = await inquirer
 		.prompt([
 			// package.json
@@ -19,6 +20,17 @@ async function discordQuestions() {
 				name: 'name',
 				message: 'What is the name of the Bot?',
 				default: 'bot'
+			},
+			{
+				type: 'list',
+				name: 'languageChoice',
+				choices: [
+					'javascript',
+					'python', 
+					'rust',
+					'golang'
+				],
+				default: 'javascript',
 			},
 			// Build .env
 			{
@@ -56,18 +68,7 @@ async function discordQuestions() {
 				message: 'What is your preferred voiceChannelId?',
 				default: 'voiceChannelId',
 			},
-			// Bot Usage
-			{
-				type: 'list',
-				name: 'languageChoice',
-				choices: [
-					'javascript',
-					'python', 
-					'rust',
-					'golang'
-				],
-				default: 'javascript',
-			},
+			// Bot Usage	
 			{
 				type: 'text',
 				name: 'export',
