@@ -42,13 +42,14 @@ class Generator {
 				spinner.stop();
 				console.log(chalk.green.bold('File Written Successfully!'));
 			}, 200);
-			copyTemplate(tempDirPath, this.templateType);
+			copyTemplate(tempDirPath, this.templateType, this.botType);
 		});
 	}
 
 	generateDotEnv() {
 		let cwd = process.cwd();
 		let tempDirPath = path.join(cwd, this.dirName);
+		// console.log(tempDirPath);
 
 		if (checkForExistingFile(`${tempDirPath}/.env`)) return;
 
@@ -58,8 +59,6 @@ class Generator {
 
 		fs.writeFileSync(`${tempDirPath}/.env`, data, (err) => {
 			if (err) return;
-
-			console.log(chalk.green.bold('File written Successfully'));
 		});
 	}
 

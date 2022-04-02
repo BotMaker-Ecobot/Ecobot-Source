@@ -3,5 +3,7 @@
 
 ![Ecbot Logo]('./Logo.png')
 
+- Check here to contribute.
+
 - To contribute see the contribution guide.
 - [Contribution Guide](./CONTRIBUTION.md)

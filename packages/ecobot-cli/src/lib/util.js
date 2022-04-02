@@ -72,16 +72,16 @@ function removeWhiteSpace(toRemove) {
 	return content;
 }
 
-function copyTemplate(sourcePath, templateType) {
+function copyTemplate(sourcePath, templateType, botType) {
 
 	// eslint-disable-next-line quotes
-	let templatePath = path.join(`${cwd}/src/Templates`, `discord-${templateType}`);
+	let templatePath = path.join(`${cwd}/src/Templates`, `${botType}-${templateType}`);
 
 
 	fse.copy(templatePath, sourcePath, err => {
 		if (err) return console.error(err);
 
-		console.log(templatePath);
+		// console.log(templatePath);
 
 		console.log(chalk.green.bold('Successfully copied files over to your directory! 😎'));
 	});

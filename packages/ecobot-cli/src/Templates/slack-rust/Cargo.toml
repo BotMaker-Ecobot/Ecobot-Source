@@ -1,0 +1,7 @@
+[package]
+name = "rust_slack_bot"
+version =  "0.1.0"
+authors = "deondreE"
+
+[dependencies]
+slack = "0.18.0"
